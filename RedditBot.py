@@ -10,13 +10,6 @@ import praw
 import os
 import json
 
-	
-# Bot id and other credentials
-id_ = ""
-secret = ""
-ps= ""
-ua = ""
-name = ""
 
 load_dotenv()
 
