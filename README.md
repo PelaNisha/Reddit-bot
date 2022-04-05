@@ -13,14 +13,27 @@ A Reddit bot is a program that can monitor posts, comments, and other users' act
 
 # How to use the file
 - Create any python file in the same directory.
-- import the RedditBot.py file like:- import RedditBot.
-- Now you can use the functions from the RedditBot.py file.
+- Import the RedditBot.py file like:- from RedditBot import *.
+- Use the functions from the RedditBot.py file.
+- How to use this program, well example is given in test.py file.
 
 # Features
 - You can fetch the posts and comments from  a subreddit and save it to a file.
-- You can analyze the posts and comments from a subreddit to generate the most common phrases or keywords.
+- You can analyze the posts and comments from a subreddit to generate the most common phrases or keywords and also url list in the comments.
 - You can give the name of the subreddit, the number of posts, comments per post in the argument of fetch_subreddit_post_comments function and also limits for keyphrase to extract in the analyze_subreddit_post_comments function.
 
 # Dependencies
-- a CodeEditor like preferably VScode
+- a Code Editor preferably VScode
 - python installed and running
+
+## Also import the following modules by using pip or pip3 install... from the terminal	
+- nltk
+- dotenv 
+- praw
+- os
+- json
+- re
+- urllib
+
+example: pip install nltk (for python version<3)
+        else pip3 install nltk 

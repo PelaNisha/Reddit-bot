@@ -1,0 +1,26 @@
+[
+  {
+    "post": "Sunday Daily Thread: What's everyone working on this week?",
+    "comments": [
+      "Hi, I'm building a GUi  and a data base filter. The GUi moves a couple files around and the filter cleans up a bunch of old excel files. I want to turn the GUi into a dashboard that will display drop down menu requests of analysis from the DB. That's where I'm at. I've been playing with tkinter for the GUi and it seems pretty straight forward.",
+      "I'm building a lightweight Entity Component System library for use with some Pygame projects I'm working on. Currently using it to create a Pong clone. Trying to refactor the library as I go to make further classic clones easier and training myself to think with ~~portals~~ ECS. Asteroids is next I think.",
+      "I'm working on school exams this week. I wild do camp Python next week.",
+      "I got access to GitHub Copilot this week and am using it now to build my Python Framework.",
+      "I'm into the fun part of a new article on Python and Docker including an introduction, a Flask / Docker example, and a working DJango + Postgresql stack in docker-compose.  Not sure what I'll do for my second article this week.  Perhaps something will inspire me. :)"
+    ]
+  },
+  {
+    "post": "Tuesday Daily Thread: Advanced questions",
+    "comments": [
+      "How long does it take to master python? \ud83e\udd14"
+    ]
+  },
+  {
+    "post": "I'm presenting live in 6 hours at Microsoft Reactor online about troubleshooting Python applications, especially on Kubernetes. (Part 2 of the Python on Kubernetes series.) Let me know your questions in advance",
+    "comments": [
+      "We're done. Thank you to everyone who joined and participated.\n\nThe recording is on youtube:\n\nhttps://www.youtube.com/watch?v=fEJhXpq-0vQ",
+      "This is part two of the talk I gave last week:\n\nhttps://www.reddit.com/r/Python/comments/tqta40/im_presenting_live_in_9_hours_at_microsoft/",
+      "Dang. Wish I had more notice. \n\nI wanted to know about debugging and observability when you have sidecars like isito\n\nEspecially when it comes to limiting diagnostic tools from the public side."
+    ]
+  }
+]

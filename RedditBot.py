@@ -9,9 +9,12 @@ from dotenv import load_dotenv
 import praw
 import os
 import json
+import re
+from urllib.parse import urlparse
 
 
 load_dotenv()
+
 
 reddit = praw.Reddit(client_id=os.getenv('ID'), 
  					client_secret=os.getenv('SECRET'),
@@ -56,29 +59,54 @@ def analyze_subreddit_post_comments(topic, number_of_posts= 3, num_of_comments= 
 	if not os.path.isfile(item): 
 		data =fetch_subreddit_post_comments(topic, number_of_posts, num_of_comments)
 	else:
-		data= parse_(item)		
-	ws =[] # empty words list
-	for post in data:
-		for comment_ in post['comments']:
-			for word in comment_.split():
-				if word not in stop_words:
-					ws.append(word)	
-	x =  count_keywords(ws, limit_for_keywords_phrase)
-	return x
+		data= parse_(item)	
+		
+	itemC = topic+"C"+".json"	
+	if not os.path.isfile(itemC): 	
+		us = []	# empty urls list
+		ws = [] # empty words list
+		for post in data:
+			for comment_ in post['comments']:
+				for word in comment_.split():
+					if is_url(word):
+						url_in_comment = urlparse(word)
+						url_hostname = url_in_comment.hostname
+						if url_hostname not in us:
+							us.append(url_hostname)
+					if word not in stop_words:
+						ws.append(word)	
+		x =  count_keywords(us,ws, limit_for_keywords_phrase)
 
-	
+		with open(itemC, "w+") as f:
+			json.dump(x, f, indent = 2)
+		return x
+	else:
+		return parse_(itemC)
+
+
+# Check if a string is a url
+def is_url(string):
+	regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
+	url = re.findall(regex,string)     
+
+	return [x[0] for x in url]
+
+
 # Count the number of times a phrase was repeated
-def count_keywords(final_words_list, limit_for_keywords_phrase):
+def count_keywords(urls_list,final_words_list, limit_for_keywords_phrase):
 	ngrams = list(nltk.ngrams(final_words_list, n=2))
 	ngrams_count = {i : ngrams.count(i) for i in ngrams}
 
-	return sort_keywords_count(ngrams_count, limit_for_keywords_phrase)
+	return sort_keywords_count(urls_list, ngrams_count, limit_for_keywords_phrase)
 
 
 # Sort the keywords phrase in descending order
-def sort_keywords_count(keyword_count, limit_for_keywords_phrase):		
-	keywords_dict = {}					
+def sort_keywords_count(urls_list,keyword_count, limit_for_keywords_phrase):		
+	keywords_dict = {}
+	urls_dict = {}	
+	urls_dict['url'] = urls_list				
 	final_list = []
+	final_list.append(urls_dict)
 	sort_orders = sorted(keyword_count.items(), key=lambda x: x[1], reverse=True)
 
 	for i in sort_orders[:limit_for_keywords_phrase]:
@@ -94,3 +122,4 @@ def parse_(top):
 	with open(top, 'r') as f:
 		data = json.load(f)
 	return data
+
