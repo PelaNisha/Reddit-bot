@@ -1,0 +1,8 @@
+nltk
+dotenv
+praw
+os
+json
+re
+urllib
+
