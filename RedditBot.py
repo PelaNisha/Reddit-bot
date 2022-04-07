@@ -102,19 +102,14 @@ def count_keywords(urls_list,final_words_list, limit_for_keywords_phrase):
 
 # Sort the keywords phrase in descending order
 def sort_keywords_count(urls_list,keyword_count, limit_for_keywords_phrase):		
-	keywords_dict = {}
-	urls_dict = {}	
-	urls_dict['url'] = urls_list				
-	final_list = []
-	final_list.append(urls_dict)
+	final_data = {'urls': urls_list, 'keywords': []}					
 	sort_orders = sorted(keyword_count.items(), key=lambda x: x[1], reverse=True)
 
 	for i in sort_orders[:limit_for_keywords_phrase]:
-		keywords_dict['words'] = i[0]
-		keywords_dict['count'] = i[1]
-		final_list.append(keywords_dict)
+		keywords_dict = {'words': i[0], 'count': i[1]}
+		final_data['keywords'].append(keywords_dict)
 		keywords_dict = {}
-	return final_list	
+	return final_data
 
 
 # Parse the file for subreddit

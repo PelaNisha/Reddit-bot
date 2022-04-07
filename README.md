@@ -10,11 +10,11 @@ A Reddit bot is a program that can monitor posts, comments, and other users' act
 6. Open the python file into your code editor.
 7. Create a new file ".env" and fill the information like ID, SECRET_KEY, etc like in the .env.example file like:
 ```
-ID=Your_id
-SECRET=Your_secret_key
-PASSWORD=The_password
-USER_AGENT=App_name
-NAME=Reddit_username
+ID=your_id
+SECRET=your_secret_key
+PASSWORD=the_password
+USER_AGENT=app_name
+NAME=reddit_username
 ```
 8. Now you are all set to use the program.
 
@@ -22,24 +22,29 @@ NAME=Reddit_username
 - Create any python file in the same directory.
 - Import the RedditBot file like:- 
 ```
-from RedditBot import *
+from RedditBot import fetch_subreddit_post_comments, analyze_subreddit_post_comments
 ```
 - Use the functions from the RedditBot file, example is given below
 ```
-from RedditBot import *
+from RedditBot import fetch_subreddit_post_comments, analyze_subreddit_post_comments
 subreddit_title = input("Enter the topic")
-scraped_data = analyze_subreddit_post_comments(subreddit_title)
-print(scraped_data)
+posts_and_comments = fetch_subreddit_post_comments(subreddit_title)
+print(posts_and_comments)
+```
+- You can also scrape urls or keywords exclusively by
+```
+print(posts_and_comments['urls'])
+print(posts_and_comments['keywords'])
 ```
 
 # Features
 - You can fetch the posts and comments from  a subreddit and save it to a file.
 ```
-scraped_data = fetch_subreddit_post_comments(subreddit_title)
+posts_and_comments = fetch_subreddit_post_comments(subreddit_title)
 ```
 - You can analyze the posts and comments from a subreddit to generate the most common phrases or keywords and also url list in the comments.
 ```
-scraped_data = analyze_subreddit_post_comments(subreddit_title)
+analyzed_posts_and_comments = analyze_subreddit_post_comments(subreddit_title)
 ```
 - You can give the name of the subreddit, the number of posts, comments per post in the argument of fetch_subreddit_post_comments function and also limits for keyphrase to extract in the analyze_subreddit_post_comments function.
 
@@ -60,10 +65,6 @@ analyze_subreddit_post_comments(topic, number_of_posts, num_of_comments, limit_f
 - nltk
 - dotenv 
 - praw
-- os
-- json
-- re
-- urllib
 
 example:
         `pip install nltk` (for python version<3)
